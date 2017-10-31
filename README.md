@@ -13,7 +13,11 @@ Window IoT core can be run on off-the-shelf computers, But all the documentation
 
 ## Tested devices
 
-
+| Device        | Chipset           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
 
 
 
