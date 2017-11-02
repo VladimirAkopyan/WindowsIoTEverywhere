@@ -19,6 +19,12 @@ Currently MIcrosoft only provides 32 bit image of Windows IoT for Minnowboard Ma
 Currently Intel provides board support packages for Atom BayTrail and Atom Apollo Lake prossesors. Cherry Trail Intel Atom prossesors are not supported. 
 A device with unsupported prossesor would still boot up, but GPU acceleration won't work, and some peripherals won't work either. A Cherry Trail (Atom® x5-Z8300) Intel Compute Stick is one example of such device. This device may still be usefull for some purposes. 
 
+## Goals
+* Document which devices work and which don't. What works and what doesn't
+* Provide x86 and x64 apollo lake Images for quick testing of devices, so everyone doesn't have to download 50 metric tons of stuff just to test their device
+* Provide drivers
+* Provide fully built images for each device 
+
 # How to test a device
 ## Backup Drivers
 First see what kind of device you are runnning. You need to get 32 bit drivers for 32 bit Windows Iot, and 64 bit drivers for 64 bit Iot. Use PowerShell to export drivers from your device while it's running "normal" Windows.
@@ -72,16 +78,21 @@ Now start a remote connection - use the name of your computer in place of linx10
 ```powershell 
 Enter-PSSession -ComputerName linx1010 -Credential linx10110\Administrator
 ``` 
-You will get 
+You will get a pop-up window asking for a password. 
+Once you are in, you'll be in the folder `C:\Data\Users\Administrator\Documents\`. Take the drivers you've saved previously, copy them to a flashdrive, and plug it into the device. It will often be given letter `D:\`.
+Usually each driver is saved in a separate folder, each folder has a few files and an `.inf` file. 
+You have to navigate to each folder, for example `cd iaiogpioe.inf_x86_e8244de89b1b260d` and installed a driver
+```powershell
+devcon.exe dp_add iaiogpioe.inf
+```
+This will report whether the driver was added succesfully. I had quite high success rate. 
+You might have a dozen or so folders, and adding al lthe drivers can take a while. They will only take effect after restart. To  restart the device, type in 
+```powershell
+shutdown /r /t 0
+```
+Now you can test the device and see how much of it's functionality works. 
 
-Althought you can build the drivers into the image, that's a time-consuming process. 
-
-
-## Goals
-* Document which devices work and which don't. What works and what doesn't
-* Provide x86 and x64 apollo lake Images for quick testing of devices, so everyone doesn't have to download 50 metric tons of stuff just to test their device
-* Provide drivers
-* Provide fully built images for each device 
+Once you've tested it, you can fill out hte table below, and decide whether building a separate image for hte dvice is worthwhile. 
 
 ## Tested devices
 ### Legend
