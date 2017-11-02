@@ -1,0 +1,2489 @@
+*%
+*% Copyright (c) 2011 Microsoft Corporation
+*% All Rights Reserved.
+*%
+*GPDFileVersion: "1.0"
+*GPDSpecVersion: "1.0"
+*GPDFileName:    "mxdw.gpd"
+*Include:        "msxpsinc.gpd"
+*Include:        "StdNames.gpd"
+*ModelName:      "Microsoft XPS Document Writer v4"
+*MasterUnits:    PAIR(1200, 1200)
+*PrinterType:    PAGE
+*MaxCopies:      1
+
+
+
+*PrintSchemaPrivateNamespaceURI: "http://schemas.microsoft.com/windows/2006/06/printing/printschemakeywords/microsoftxpsdocumentwriter"
+
+*%******************************************************************************
+*%                            Resource DLL
+*%******************************************************************************
+*Feature: RESDLL
+{
+    *Option: MXDWRes
+    {
+        *Name: "mxdwdui.dll"
+    }
+}
+
+*%******************************************************************************
+*%                             Interleaving
+*%******************************************************************************
+*Feature: Interleaving
+{
+    *rcNameID: RESDLL.MXDWRes.280
+    *DefaultOption: OFF
+
+    *Option: OFF
+    {
+        *rcNameID: RESDLL.MXDWRes.281
+    }
+
+    *Option: ON
+    {
+        *rcNameID: RESDLL.MXDWRes.282
+    }
+}
+
+*%******************************************************************************
+*%                             ImageType
+*%******************************************************************************
+*Feature: ImageType
+{
+    *rcNameID: RESDLL.MXDWRes.283
+    *DefaultOption: JPEGMed
+
+    *Option: JPEGHigh
+    {
+        *rcNameID: RESDLL.MXDWRes.284
+    }
+
+    *Option: JPEGMed
+    {
+        *rcNameID: RESDLL.MXDWRes.285
+    }
+
+    *Option: JPEGLow
+    {
+        *rcNameID: RESDLL.MXDWRes.286
+    }
+
+    *Option: PNG
+    {
+        *rcNameID: RESDLL.MXDWRes.287
+    }
+}
+
+*%******************************************************************************
+*%                             Orientation
+*%******************************************************************************
+*Feature: Orientation
+{
+    *rcNameID: =ORIENTATION_DISPLAY
+    *DefaultOption: PORTRAIT
+
+    *Option: PORTRAIT
+    {
+        *rcNameID: =PORTRAIT_DISPLAY
+    }
+
+    *Option: LANDSCAPE_CC270
+    {
+        *rcNameID: =LANDSCAPE_DISPLAY
+    }
+}
+
+*%******************************************************************************
+*%                             Collate
+*%******************************************************************************
+*Feature: Collate
+{
+    *Name: "Collate"
+    *DefaultOption: OFF
+    *ConcealFromUI?: TRUE
+
+    *Option: OFF
+    {
+        *rcNameID: =OFF_DISPLAY
+    }
+}
+
+*%******************************************************************************
+*%                             Input Bin
+*%******************************************************************************
+*Feature: InputBin
+{
+    *rcNameID: =PAPER_SOURCE_DISPLAY
+    *DefaultOption: FORMSOURCE
+    *ConcealFromUI?: TRUE
+
+    *Option: FORMSOURCE
+    {
+        *rcNameID: =AUTO_DISPLAY
+    }
+}
+
+*%******************************************************************************
+*%                              Resolution
+*%******************************************************************************
+*Feature: Resolution
+{
+    *rcNameID: =RESOLUTION_DISPLAY
+    *DefaultOption: Option1
+
+    *Option: Option1
+    {
+        *Name: "600 x 600 " =DOTS_PER_INCH
+        *DPI: PAIR(600, 600)
+        *TextDPI: PAIR(600, 600)
+        *SpotDiameter: 100
+        *Command: CmdBeginRaster { *Cmd : "<1B>*v7S<1B>*r1A" }
+        *Command: CmdEndRaster { *Cmd : "<1B>*rC" }
+        *Command: CmdSendBlockData { *Cmd : "<1B>*b" %d{NumOfDataBytes}"W" }
+    }
+}
+
+*%******************************************************************************
+*%                            Paper Size
+*%******************************************************************************
+*Feature: PaperSize
+{
+    *rcNameID: =PAPER_SIZE_DISPLAY
+    *DefaultOption: LETTER
+
+    *Option: LETTER
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10200, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10200, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: LETTERSMALL
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10200, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10200, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: TABLOID
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(13200, 20400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(13200, 20400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: LEDGER
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(20400, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(20400, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: LEGAL
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10200, 16800)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10200, 16800)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: STATEMENT
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(6600, 10200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(6600, 10200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: EXECUTIVE
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(8700, 12600)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(8700, 12600)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A3
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(14031, 19842)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(14031, 19842)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A4
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9921, 14031)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(9921, 14031)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A4SMALL
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9921, 14031)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(9921, 14031)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A5
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(6992, 9921)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(6992, 9921)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: B4
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(12141, 17196)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(12141, 17196)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: B5
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(8598, 12141)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(8598, 12141)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: FOLIO
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10200, 15600)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10200, 15600)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: QUARTO
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10157, 12992)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10157, 12992)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: 10X14
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(12000, 16800)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(12000, 16800)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: 11X17
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(13200, 20400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(13200, 20400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: NOTE
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10200, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10200, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_9
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4650, 10650)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(4650, 10650)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_10
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4950, 11400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(4950, 11400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_11
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(5400, 12450)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(5400, 12450)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_12
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(5700, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(5700, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_14
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(6000, 13800)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(6000, 13800)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: CSHEET
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(20400, 26400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(20400, 26400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: DSHEET
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(26400, 40800)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(26400, 40800)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ESHEET
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(40800, 52800)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(40800, 52800)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_DL
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(5196, 10393)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(5196, 10393)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_C5
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(7653, 10818)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(7653, 10818)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_C3
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(15307, 21637)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(15307, 21637)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_C4
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10818, 15307)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10818, 15307)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_C6
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(5385, 7653)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(5385, 7653)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_C65
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(5385, 10818)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(5385, 10818)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_B4
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(11811, 16677)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(11811, 16677)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_B5
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(8314, 11811)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(8314, 11811)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_B6
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(8314, 5905)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(8314, 5905)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_ITALY
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(5196, 10866)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(5196, 10866)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_MONARCH
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4650, 9000)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(4650, 9000)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_PERSONAL
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4350, 7800)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(4350, 7800)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: FANFOLD_US
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(17850, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(17850, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: FANFOLD_STD_GERMAN
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10200, 14400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10200, 14400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: FANFOLD_LGL_GERMAN
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10200, 15600)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10200, 15600)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ISO_B4
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(11811, 16677)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(11811, 16677)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: JAPANESE_POSTCARD
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4724, 6992)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(4724, 6992)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: 9X11
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10800, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10800, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: 10X11
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(12000, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(12000, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: 15X11
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(18000, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(18000, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: ENV_INVITE
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10393, 10393)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10393, 10393)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: LETTER_EXTRA
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(11400, 14400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(11400, 14400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: LEGAL_EXTRA
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(11400, 18000)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(11400, 18000)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: TABLOID_EXTRA
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(14400, 21600)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(14400, 21600)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A4_EXTRA
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(11124, 15228)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(11124, 15228)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: LETTER_TRANSVERSE
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10200, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10200, 13200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A4_TRANSVERSE
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9921, 14031)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(9921, 14031)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: LETTER_EXTRA_TRANSVERSE
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(11400, 14400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(11400, 14400)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A_PLUS
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10724, 16818)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10724, 16818)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: B_PLUS
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(14409, 23007)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(14409, 23007)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: LETTER_PLUS
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10200, 15228)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10200, 15228)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A4_PLUS
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9921, 15590)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(9921, 15590)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A5_TRANSVERSE
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(6992, 9921)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(6992, 9921)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: B5_TRANSVERSE
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(8598, 12141)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(8598, 12141)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A3_EXTRA
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(15212, 21023)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(15212, 21023)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A5_EXTRA
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(8220, 11102)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(8220, 11102)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: B5_EXTRA
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9496, 13039)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(9496, 13039)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A2
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(19842, 28062)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(19842, 28062)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A3_TRANSVERSE
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(14031, 19842)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(14031, 19842)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A3_EXTRA_TRANSVERSE
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(15212, 21023)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(15212, 21023)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: DBL_JAPANESE_POSTCARD
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9448, 6992)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(9448, 6992)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A6
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4960, 6992)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(4960, 6992)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: JENV_KAKU2
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(11338, 15685)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(11338, 15685)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: JENV_KAKU3
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10204, 13086)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10204, 13086)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: JENV_CHOU3
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(5669, 11102)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(5669, 11102)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: JENV_CHOU4
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4251, 9685)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(4251, 9685)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: LETTER_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(13200, 10200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(13200, 10200)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A3_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(19842, 14031)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(19842, 14031)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A4_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(14031, 9921)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(14031, 9921)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A5_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9921, 6992)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(9921, 6992)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: B4_JIS_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(17196, 12141)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(17196, 12141)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: B5_JIS_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(12141, 8598)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(12141, 8598)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: JAPANESE_POSTCARD_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(6992, 4724)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(6992, 4724)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: DBL_JAPANESE_POSTCARD_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(6992, 9448)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(6992, 9448)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: A6_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(6992, 4960)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(6992, 4960)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: JENV_KAKU2_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(15685, 11338)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(15685, 11338)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: JENV_KAKU3_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(13086, 10204)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(13086, 10204)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: JENV_CHOU3_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(11102, 5669)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(11102, 5669)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: JENV_CHOU4_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9685, 4251)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(9685, 4251)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: B6_JIS
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(6047, 8598)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(6047, 8598)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: B6_JIS_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(8598, 6047)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(8598, 6047)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: 12X11
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(14406, 13205)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(14406, 13205)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: JENV_YOU4
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4960, 11102)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(4960, 11102)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: JENV_YOU4_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(11102, 4960)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(11102, 4960)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: P16K
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(8881, 12283)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(8881, 12283)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: P32K
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(6141, 8692)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(6141, 8692)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: P32KBIG
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(6614, 9590)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(6614, 9590)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_1
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4818, 7795)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(4818, 7795)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_2
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(4818, 8314)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(4818, 8314)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_3
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(5905, 8314)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(5905, 8314)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_4
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(5196, 9826)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(5196, 9826)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_5
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(5196, 10393)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(5196, 10393)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_6
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(5669, 10866)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(5669, 10866)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_7
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(7559, 10866)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(7559, 10866)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_8
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(5669, 14598)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(5669, 14598)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_9
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10818, 15307)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10818, 15307)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_10
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(15307, 21637)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(15307, 21637)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: P16K_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(12283, 8881)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(12283, 8881)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: P32K_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(8692, 6141)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(8692, 6141)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: P32KBIG_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9590, 6614)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(9590, 6614)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_1_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(7795, 4818)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(7795, 4818)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_2_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(8314, 4818)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(8314, 4818)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_3_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(8314, 5905)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(8314, 5905)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_4_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(9826, 5196)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(9826, 5196)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_5_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10393, 5196)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10393, 5196)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_6_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10866, 5669)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10866, 5669)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_7_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(10866, 7559)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(10866, 7559)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_8_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(14598, 5669)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(14598, 5669)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: PENV_9_ROTATED
+    {
+        *rcNameID: =RCID_DMPAPER_SYSTEM_NAME
+        *switch: Orientation
+        {
+            *case: PORTRAIT
+            {
+                *PrintableArea: PAIR(15307, 10818)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+            *case: LANDSCAPE_CC270
+            {
+                *PrintableArea: PAIR(15307, 10818)
+                *PrintableOrigin: PAIR(0, 0)
+                *CursorOrigin: PAIR(0, 0)
+            }
+        }
+    }
+
+    *Option: CUSTOMSIZE
+    {
+        *rcNameID: =USER_DEFINED_SIZE_DISPLAY
+        *MinSize: PAIR(60, 60)
+        *MaxSize: PAIR(101455200, 101455200)
+        *MaxPrintableWidth: 101455200
+        *MinLeftMargin: 0
+    }
+
+}
+
+*%******************************************************************************
+*%                            Color Mode
+*%******************************************************************************
+*Feature: ColorMode
+{
+    *rcNameID: =COLOR_PRINTING_MODE_DISPLAY
+    *DefaultOption: 24bpp
+    *ConcealFromUI?: TRUE
+
+    *Option: 24bpp
+    {
+        *rcNameID: =24BPP_DISPLAY
+        *DevNumOfPlanes: 1
+        *DevBPP: 24
+        *DrvBPP: 24
+    }
+}
+
+*%******************************************************************************
+*%                         Cursor Commands
+*%******************************************************************************
+*Command: CmdCR { *Cmd : "<0D>" }
+*Command: CmdLF { *Cmd : "<0A>" }
+*Command: CmdFF { *Cmd : "<0C>" }

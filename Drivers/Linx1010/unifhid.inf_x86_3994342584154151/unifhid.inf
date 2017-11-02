@@ -1,0 +1,84 @@
+;##############################################################################
+;#  unifhid.INF for Windows XP/VISTA/Win7
+;#  Copyright (c) 2012 Logitech. All rights reserved.
+;##############################################################################
+
+[Version]
+Signature   = "$Windows NT$"
+CatalogFile.NTx86 = unifhidx86.CAT
+CatalogFile.NTAMD64 = unifhidx64.cat
+Class       = HIDClass
+ClassGuid   = {745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider    = Logitech
+DriverVer   = 09/09/2016,1.10.78.0
+
+[DestinationDirs]
+DefaultDestDir = 11
+LogiLDA_CopyFiles = 11
+
+[ControlFlags]
+ExcludeFromSelect   = *
+
+[SourceDisksNames]
+1 = %DiskName%,
+
+[SourceDisksFiles.x86]
+LogiLDA.DLL = 1,\x86
+LdaCx2.dll = 1,\x86
+msvcp110.DLL = 1,\x86
+msvcr110.DLL = 1,\x86
+vccorlib110.DLL = 1,\x86
+
+[SourceDisksFiles.amd64]
+LogiLDA.DLL = 1,\x64
+LdaCx2.DLL = 1,\x64
+msvcp110.DLL = 1,\x64
+msvcr110.DLL = 1,\x64
+vccorlib110.DLL = 1,\x64
+
+[Manufacturer]
+%Provider%	= Logitech,ntx86
+%Provider64%	= Logitech,NTamd64
+
+[Logitech.ntx86]
+%hpps.desc% = LogiLDA,USB\Vid_046d&Pid_c52b&MI_00
+
+[Logitech.NTamd64]
+%hpps.desc% = LogiLDA,USB\Vid_046d&Pid_c52b&MI_00
+
+[LogiLDA.NT]
+Include = input.inf
+Needs = HID_Inst.NT
+AddReg = LogiLDA_SetFlag
+
+[LogiLDA.NT.HW]
+Include = input.inf
+Needs = HID_Inst.NT.HW
+
+[LogiLDA.NT.Services]
+Include = input.inf
+Needs = HID_Inst.NT.Services
+
+[LogiLDA.NT.CoInstallers]	
+CopyFiles = LogiLDA_CopyFiles
+AddReg = LogiLDA_AddReg
+ 
+[LogiLDA_AddReg]
+HKR,,CoInstallers32,0x00010000,"LogiLDA.DLL,CoDeviceInstall"
+
+[LogiLDA_SetFlag]
+HKLM,Software\Logishrd\LogiLDA.DLL,Protocol,0x00010001,2
+
+[LogiLDA_CopyFiles]
+LogiLDA.DLL
+LdaCx2.dll
+msvcp110.dll
+msvcr110.dll
+vccorlib110.dll
+
+[Strings]
+Provider = "Logitech"
+Provider64 = "Logitech (x64)"
+DiskName = "Logitech USB LDA Disk"
+hpps.desc = "Logitech USB Input Device"
+

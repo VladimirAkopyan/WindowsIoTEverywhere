@@ -1,0 +1,150 @@
+;
+; IWD VAD INF file
+; Last updated: Dec 07, 2010
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=MEDIA
+Provider=%INTC%
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+
+CatalogFile.ntx86=intelaudx86.cat
+CatalogFile.ntamd64=intelaudx64.cat
+DriverVer=11/19/2015,4.5.71.0
+
+
+[SourceDisksNames]
+1=%INTAUD_WEX.DiskName%,"",1
+
+[SourceDisksFiles]
+intelaud.sys=1
+
+[Manufacturer]
+%MfgName%=IntelAudio,NTx86
+
+[IntelAudio]
+;%INTAUD_WEX.DeviceDesc%=INTAUD_WEX,USB\VID_045e&PID_0101
+%INTAUD_WEX.DeviceDesc%=INTAUD_WEX,{4d36e96c-e325-11ce-bfc1-08002be10318}\*IntAudWaveEx
+
+;; This section enables installing on x64 systems
+[IntelAudio.NTx86]
+;%INTAUD_WEX.DeviceDesc%=INTAUD_WEX,USB\VID_045e&PID_0101
+%INTAUD_WEX.DeviceDesc%=INTAUD_WEX,{4d36e96c-e325-11ce-bfc1-08002be10318}\*IntAudWaveEx
+
+[DestinationDirs]
+INTAUD_WEX.CopyList=10,system32\drivers
+
+;======================================================
+; INTAUD_WEX
+;======================================================
+;[INTAUD_WEX]
+;AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+;CopyFiles=INTAUD_WEX.CopyList
+;AddReg=INTAUD_WEX.AddReg
+
+[INTAUD_WEX.CopyList]
+intelaud.sys
+
+;[INTAUD_WEX.Interfaces]
+;AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,INTAUD.I.Wave
+;AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,INTAUD.I.Wave
+;AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,INTAUD.I.Wave
+;AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,INTAUD.I.Topo
+
+[INTAUD_WEX.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,intelaud.sys
+
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+
+HKR,Drivers\wave\wdmaud.drv,Description,,%INTAUD_WEX.DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%INTAUD_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%INTAUD_WEX.DeviceDesc%
+
+
+;======================================================
+; COMMON
+;======================================================
+[INTAUD.I.Wave]
+AddReg=INTAUD.I.Wave.AddReg
+[INTAUD.I.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%INTAUD.Wave.szPname%
+HKR,"EP\\0",%PKEY_Device_DeviceDesc%,,%IWDVAD.Speaker%
+
+[INTAUD.I.Topo]
+AddReg=INTAUD.I.Topo.AddReg
+[INTAUD.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%INTAUD.Topo.szPname%
+
+HKLM,%MediaCategories%\%GUID.IWDVAD_1%,Name,,%Pin.IWDVAD_1%
+HKLM,%MediaCategories%\%GUID.IWDVAD_2%,Name,,%Pin.IWDVAD_2%
+
+HKR,"EP\\0",%PKEY_Device_DeviceDesc%,,%IWDVAD.Speaker%
+
+
+;======================================================
+; INTAUD_WEX
+;======================================================
+[INTAUD_WEX.NT]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=INTAUD_WEX.CopyList
+AddReg=INTAUD_WEX.AddReg
+
+[INTAUD_WEX.NT.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,INTAUD.I.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,INTAUD.I.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,INTAUD.I.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,INTAUD.I.Topo
+
+[INTAUD_WEX.NT.Services]
+AddService=intaud_WaveExtensible,0x00000002,intaud_WaveExtensible_Service_Inst
+
+[intaud_WaveExtensible_Service_Inst]
+DisplayName=%INTAUD_WEX.SvcDesc%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\intelaud.sys
+
+;======================================================
+; COMMON
+;======================================================
+[Strings]
+INTC="Intel Corporation"
+MfgName="Intel Corporation"
+INTAUD_WEX.DeviceDesc="Intel WiDi Audio Device"
+INTAUD_WEX.DiskName="Intel Wireless Display Audio Driver Disk"
+
+INTAUD.Wave.szPname="INTAUD Wave"
+INTAUD.Topo.szPname="INTAUD Topology"
+INTAUD_MIDI="INTAUD -> WDM Midi Device"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+
+INTAUD_WEX.SvcDesc="Intel WiDi Audio Device"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+
+GUID.IWDVAD_1="{2F51819D-58C5-465d-BD27-57AB911DB690}"
+GUID.IWDVAD_2="{2F51819E-58C5-465d-BD27-57AB911DB690}"
+
+Pin.IWDVAD_1="Speakers/IWD"
+Pin.IWDVAD_2="Speakers/IWD2"
+
+PKEY_Device_DeviceDesc        = "{A45C254E-DF1C-4EFD-8020-67D146A850E0},2"
+IWDVAD.Speaker="Speakers/IWD"
+

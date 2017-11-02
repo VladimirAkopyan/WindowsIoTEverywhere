@@ -1,0 +1,101 @@
+;/*++
+;
+;Copyright (c) 2009-2014 Intel Corporation All rights Reserved
+;
+;Module Name:
+;
+;    HIDFusion.inf
+;
+;Abstract:
+;    INF file for installing Intel Fusion Sensor driver
+;
+;Installation Notes:
+;    Using Devcon: Type "pnputil -i -a HIDFusion.inf" to install
+;
+;--*/
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=HIDClass 
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%VENDOR%
+CatalogFile=HIDFusion.cat
+DriverVer=07/21/2014,13.42.28.891
+PnPLockDown=1
+   
+;   In order to use IHV drivers, the SourceDisksNames section must list the 
+;   disk(s) containing the drivers and the SourceDisksFiles section must list 
+;   which disk number each file to be copied is found on.
+;   Disk number 99 is used to avoid a conflict with the disk numbers defined 
+;   in layout.inf
+;
+;   Files used in a driver installation need to be digitally signed otherwise 
+;   installation may fail.  See documentation elsewhere in the DDK regarding 
+;   driver signing.
+
+[SourceDisksFiles]
+HIDFusion.sys = 99
+
+
+[SourceDisksNames]
+99 = %DISK_NAME%,,,""
+
+[DestinationDirs]
+CopyFilterDriver = 12      
+
+
+[Manufacturer]
+%VENDOR%=Intel,NTx86
+
+
+[Intel.NTx86]
+%SensorFusion%    = SensorFusion.Inst, ACPI\FUSI0001
+
+
+;===============================================================
+;   SensorFusion
+;   Instead of using hidkmdf.sys as the shim, use the inbox mshidkmdf.sys
+;===============================================================
+[SensorFusion.Inst.NT]
+; Just copy the driver. No neeed to copy other system binaries.
+CopyFiles = CopyFilterDriver
+
+[SensorFusion.Inst.NT.HW]
+AddReg = SensorFusion.AddReg
+
+;
+; hidkmdf is the function driver and SensorFusion is the lower filter
+;
+[SensorFusion.Inst.NT.Services]
+AddService = SensorFusion,, SensorFusion_Service_Inst
+AddService = mshidkmdf, 0x000001fa, mshidkmdf.AddService ;flag 0x2 sets this as the service for the device
+
+[mshidkmdf.AddService]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\mshidkmdf.sys
+
+[SensorFusion.AddReg]
+HKR,,"LowerFilters",0x00010000,"SensorFusion"
+
+;===============================================================
+;   Sections common to all OS versions
+;===============================================================
+
+[CopyFilterDriver]
+HIDFusion.sys
+
+[SensorFusion_Service_Inst]
+DisplayName    = %SensorFusion%
+ServiceType    = 0x1
+StartType      = 0x3
+ErrorControl   = 0x1
+ServiceBinary  = %12%\HIDFusion.sys
+
+[Strings] 
+;  *******Localizable Strings******* 
+VENDOR              = "Intel Corporation" 
+SensorFusion        = "Fusion Sensor" 
+DISK_NAME           = "Intel Sensor Fusion Install Disk"
+

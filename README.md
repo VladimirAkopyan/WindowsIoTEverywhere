@@ -19,6 +19,8 @@ Currently MIcrosoft only provides 32 bit image of Windows IoT for Minnowboard Ma
 Currently Intel provides board support packages for Atom BayTrail and Atom Apollo Lake prossesors. Cherry Trail Intel Atom prossesors are not supported. 
 A device with unsupported prossesor would still boot up, but GPU acceleration won't work, and some peripherals won't work either. A Cherry Trail (Atom® x5-Z8300) Intel Compute Stick is one example of such device. This device may still be usefull for some purposes. 
 
+Annabooks guys mention that they managed to get Windows IoT to work on I3 and I7 cpus and even get the graphics to work. See the *Recommended Reading* for details. 
+
 ## Goals
 * Document which devices work and which don't. What works and what doesn't
 * Provide x86 and x64 apollo lake Images for quick testing of devices, so everyone doesn't have to download 50 metric tons of stuff just to test their device
@@ -94,7 +96,17 @@ Now you can test the device and see how much of it's functionality works.
 
 Once you've tested it, you can fill out hte table below, and decide whether building a separate image for hte dvice is worthwhile. 
 
-## Tested devices
+# Contributing
+* Repo will host Drivers
+* Repo does not need to host graphics drivers for supported BSPs, they are already part of the BSP
+* Repo will provide built images as releases
+* Any info will be provided as MD files, not the wiki. 
+
+# Reccomended Reading
+* [Adafruit Getting Started with Windows IoT Core](https://cdn-learn.adafruit.com/downloads/pdf/getting-started-with-windows-iot-on-raspberry-pi.pdf)
+* [Annabooks: Windows IoT on Intel Platforms](http://www.annabooks.com/Articles/Articles_IoT10Core/Windows-10-IoT-Core-on-Intel-Architecture%20Rev1.6.pdf)
+
+# Tested devices
 ### Legend
 
 * ✔️ - Works
