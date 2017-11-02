@@ -1,4 +1,5 @@
 # WindowsIoTEverywhere
+[Windows Iot on a tablet](/images/Illustration.jpeg "Windows Iot on a tablet")
 Windows IoT running on off-the-shelf tablets, mini-pcs, and various computers. Many off-the-sheld devices are compatiable with Windows IoT Core, but it uses a more resticted driver model. The only way to find out which ones are compatiable is to test them
 The Goal is to find a few off-the-shelf devices that work well and bring together everything needed for an average dev can get them working immediately. 
 
@@ -80,6 +81,7 @@ Now start a remote connection - use the name of your computer in place of linx10
 ```powershell 
 Enter-PSSession -ComputerName linx1010 -Credential linx10110\Administrator
 ``` 
+[Windows Iot on a tablet](/images/PowerShell.png "Windwos Iot on a tablet")
 You will get a pop-up window asking for a password. 
 Once you are in, you'll be in the folder `C:\Data\Users\Administrator\Documents\`. Take the drivers you've saved previously, copy them to a flashdrive, and plug it into the device. It will often be given letter `D:\`.
 Usually each driver is saved in a separate folder, each folder has a few files and an `.inf` file. 
