@@ -12,13 +12,20 @@ Currently Microsoft provides images for three boards, and all of them have issue
 Window IoT core can be run on off-the-shelf computers, But all the documentation is meant for OEMs. You have to be knowledgeable about drivers and even then it's days of mucking about, It's a terrible pain. Even then, everyone is duplicating effort and wasting time. let's pool our efforts. 
 
 ## Tested devices
+### Legend
 
-| Device        | Chipset           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+* ✔️ - Works
+* ❌ - Doesn't Work
+* 🔘 - No such capability on device
+* ❔ - Untested
 
+| Device            | Chipset       |UEFI|Boot|GPU| WiFi | BLE | Sound | Mic | Touch | Camera | 
+| ------------------|---------------|----|----|---|------|-----|-------|-----|-------|--------|
+| Compute Stick     | Atom® x5-Z8300| 32 |✔️  |❌| ✔️   |✔️  | 🔘    | 🔘 | 🔘   | 🔘     |
+| Compute Stick     | Atom Z3735F   | 32 |✔️  |✔️| ✔️   |✔️  | 🔘    | 🔘 | 🔘   | 🔘     |
+| Tablet Linx1010   | Atom Z3735F   | 32 |✔️  |✔️| ✔️   |✔️  | ✔️    | ✔️ | ✔️   | ❔      |
+| Tablet Chuwi Hi10 | Atom Z8300    | 64 |❔   |❔ | ❔   |❔   | ❔     | ❔  | ❔   | ❔      |
+| Jumper EZpad 6 Pro| Celeron N3450 | ❔ |❔   |❔ | ❔   |❔   | ❔     | ❔  | ❔    | ❔     |
 
 
 
