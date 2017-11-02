@@ -1,5 +1,5 @@
 # WindowsIoTEverywhere
-![Windows Iot on a tablet](/images/Illustration.jpeg "Windows Iot on a tablet")
+![Windows Iot on a tablet](/Images/Illustration.jpeg)
 Windows IoT running on off-the-shelf tablets, mini-pcs, and various computers. Many off-the-sheld devices are compatiable with Windows IoT Core, but it uses a more resticted driver model. The only way to find out which ones are compatiable is to test them
 The Goal is to find a few off-the-shelf devices that work well and bring together everything needed for an average dev can get them working immediately. 
 
