@@ -81,7 +81,7 @@ Now start a remote connection - use the name of your computer in place of linx10
 ```powershell 
 Enter-PSSession -ComputerName linx1010 -Credential linx10110\Administrator
 ``` 
-![Windows Iot on a tablet](/images/PowerShell.png "Windwos Iot on a tablet")
+![Windows Iot on a tablet](/Images/PowerShell.png)
 You will get a pop-up window asking for a password. 
 Once you are in, you'll be in the folder `C:\Data\Users\Administrator\Documents\`. Take the drivers you've saved previously, copy them to a flashdrive, and plug it into the device. It will often be given letter `D:\`.
 Usually each driver is saved in a separate folder, each folder has a few files and an `.inf` file. 
