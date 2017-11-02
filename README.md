@@ -57,12 +57,22 @@ Once you have the FFU, place it in the root of the flashdrive.
 Plug the flashdrive into the device you wish to test. You must restart the device, and get it to boot from the flashdrive. As I've described in **Check for UEFI** section, switch the console to the flashdrive and run `JouleInstaller.cmd`. The process should go smoothly. 
 
 ## Installing drivers
-This is the part wehre we find out the truth. 
-Once your device boots up, you find it's IP address using a [Windows IoT Dashboard](https://docs.microsoft.com/en-us/windows/iot-core/connect-your-device/iotdashboard). That will let you login to a web portal and manage the device. If your device has no connectivity, get a USB2 Ethernet-to-USB adapter, most of them work out of the box even with Windows IoT. 
+This is the fun part
+Once your device boots up, you find it's IP address using a [Windows IoT Dashboard](https://docs.microsoft.com/en-us/windows/iot-core/connect-your-device/iotdashboard). That will let you login to a web portal and manage the device. Default password is `p@ssw0rd` If your device has no connectivity, get a USB2 Ethernet-to-USB adapter, most of them work out of the box even with Windows IoT. 
 
 Remotely [connect to your device through PowerShell](https://docs.microsoft.com/en-us/windows/iot-core/connect-your-device/powershell) 
 Open PowerShell as Administrator and type in 
+```powershell 
+net start WinRM
+Set-Item WSMan:\localhost\Client\TrustedHosts –Value <machine-name or IP address>
+```
+In the latter line we are setting the device as a trusted device for further connections. 
 
+Now start a remote connection - use the name of your computer in place of linx1010, which you've set in the IoT Dashboard. 
+```powershell 
+Enter-PSSession -ComputerName linx1010 -Credential linx10110\Administrator
+``` 
+You will get 
 
 Althought you can build the drivers into the image, that's a time-consuming process. 
 
