@@ -13,7 +13,32 @@ You might protest that off -the shelf devices don't have GPIOs, but one can use 
 Currently Microsoft provides images for three boards, and all of them have issues or suck for anything beyong a hobby project. 
 Window IoT core can be run on off-the-shelf computers, But all the documentation is meant for OEMs. You have to be knowledgeable about drivers and even then it's days of mucking about, It's a terrible pain. Even then, everyone is duplicating effort and wasting time. let's pool our efforts. 
 
-## High-level overview
+## Goals
+* Document which devices work and which don't. What works and what doesn't
+* Provide x86 and x64 apollo lake Images for quick testing of devices, so everyone doesn't have to download 50 metric tons of stuff just to test their device
+* Provide drivers
+* Provide fully built images for each device 
+
+# Tested devices
+### Legend
+
+* ✔️ - Works
+* ❌ - Doesn't Work
+* 🔘 - No such capability on device
+* ❔ - Untested
+
+| Device            | Chipset       |UEFI|Boot|GPU| WiFi | BLE | Sound | Mic | Touch | Camera | 
+| ------------------|---------------|----|----|---|------|-----|-------|-----|-------|--------|
+| Compute Stick     | Atom® x5-Z8300| 32 |✔️  |❌| ✔️   |✔️  | 🔘    | 🔘 | 🔘   | 🔘     |
+| Compute Stick     | Atom Z3735F   | 32 |✔️  |✔️| ✔️   |✔️  | 🔘    | 🔘 | 🔘   | 🔘     |
+| Tablet Linx1010   | Atom Z3735F   | 32 |✔️  |✔️| ✔️   |✔️  | ✔️    | ✔️ | ✔️   | ❔      |
+| Tablet Chuwi Hi10 | Atom Z8300    | 64 |❔   |❔ | ❔   |❔   | ❔     | ❔  | ❔   | ❔      |
+| Jumper EZpad 6 Pro| Celeron N3450 | ❔ |❔   |❔ | ❔   |❔   | ❔     | ❔  | ❔    | ❔     |
+| ECDream DreamOne  | Celeron N3450 | ❔ |❔   |❔ | ❔   |❔   | ❔     | ❔  | ❔    | ❔     |
+| PIPO X10pro       | Atom Z8330    | ❔ |❔   |❔ | ❔   |❔   | ❔     | ❔  | ❔    | ❔     |
+
+
+# Overview
 Intel IoT core will boot on most UEFI systems. A 32 bit UEFI will boot 32 bit Windwos IoT, and 64 bit UEFI can only boot 64 bit Windows IoT. This is not the case with "normal" operating systems- they would boot either way. 
 Currently MIcrosoft only provides 32 bit image of Windows IoT for Minnowboard Max, and if you wish to test it on another machine, you have to build an image yourself, the process is described in [Windwos IoT Core Build your own image section](https://docs.microsoft.com/en-us/windows/iot-core/). 
 
@@ -21,12 +46,6 @@ Currently Intel provides board support packages for Atom BayTrail and Atom Apoll
 A device with unsupported prossesor would still boot up, but GPU acceleration won't work, and some peripherals won't work either. A Cherry Trail (Atom® x5-Z8300) Intel Compute Stick is one example of such device. This device may still be usefull for some purposes. 
 
 Annabooks guys mention that they managed to get Windows IoT to work on I3 and I7 cpus and even get the graphics to work. See the *Recommended Reading* for details. 
-
-## Goals
-* Document which devices work and which don't. What works and what doesn't
-* Provide x86 and x64 apollo lake Images for quick testing of devices, so everyone doesn't have to download 50 metric tons of stuff just to test their device
-* Provide drivers
-* Provide fully built images for each device 
 
 # How to test a device
 ## Backup Drivers
@@ -107,25 +126,5 @@ Once you've tested it, you can fill out hte table below, and decide whether buil
 # Reccomended Reading
 * [Adafruit Getting Started with Windows IoT Core](https://cdn-learn.adafruit.com/downloads/pdf/getting-started-with-windows-iot-on-raspberry-pi.pdf)
 * [Annabooks: Windows IoT on Intel Platforms](http://www.annabooks.com/Articles/Articles_IoT10Core/Windows-10-IoT-Core-on-Intel-Architecture%20Rev1.6.pdf)
-
-# Tested devices
-### Legend
-
-* ✔️ - Works
-* ❌ - Doesn't Work
-* 🔘 - No such capability on device
-* ❔ - Untested
-
-| Device            | Chipset       |UEFI|Boot|GPU| WiFi | BLE | Sound | Mic | Touch | Camera | 
-| ------------------|---------------|----|----|---|------|-----|-------|-----|-------|--------|
-| Compute Stick     | Atom® x5-Z8300| 32 |✔️  |❌| ✔️   |✔️  | 🔘    | 🔘 | 🔘   | 🔘     |
-| Compute Stick     | Atom Z3735F   | 32 |✔️  |✔️| ✔️   |✔️  | 🔘    | 🔘 | 🔘   | 🔘     |
-| Tablet Linx1010   | Atom Z3735F   | 32 |✔️  |✔️| ✔️   |✔️  | ✔️    | ✔️ | ✔️   | ❔      |
-| Tablet Chuwi Hi10 | Atom Z8300    | 64 |❔   |❔ | ❔   |❔   | ❔     | ❔  | ❔   | ❔      |
-| Jumper EZpad 6 Pro| Celeron N3450 | ❔ |❔   |❔ | ❔   |❔   | ❔     | ❔  | ❔    | ❔     |
-| ECDream DreamOne  | Celeron N3450 | ❔ |❔   |❔ | ❔   |❔   | ❔     | ❔  | ❔    | ❔     |
-| PIPO X10pro       | Atom Z8330    | ❔ |❔   |❔ | ❔   |❔   | ❔     | ❔  | ❔    | ❔     |
-
-
 
 
