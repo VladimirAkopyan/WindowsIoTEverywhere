@@ -36,21 +36,33 @@ copype amd64 C:\WinPE_amd64
 amd64 can be replaced with x86 or ARM as needed. Change file path as needed too. 
 Then take contents of `C:\WinPE_amd64\media` and copy them to your formatted flash drive. That's it, you have a bootable drive! NO special magic needed. 
 Don't forget that for 32 bit devices you need to create a bootable flash drive with x86 version of Windows PE, and for x64 you need x64 version. 
-Next take JouleInstaller.cmd from this repository, it is a program that will flash a WindowsIoT image (FFU) onto the device drive, and it's avaliable from this repo. 
-Last thing to do is to get the right FFU and to place it in the root of the flashdrive. 
+Next take `JouleInstaller.cmd` from this repository, it is a program that will flash a WindowsIoT image (FFU) onto the device drive, and it's avaliable from this repo. 
 
-## Getting the FFU
-If it's a Bay trail device, it will probably have a 32 bit UEFI, and you can go ahead and flash a MinnowBoard Max image by following [Instruction for Intel Compute Stick](https://developer.microsoft.com/en-us/windows/iot/Docs/GetStarted/IntelComputeStick/GetStartedStep1.htm) 
+## Check for UEFI
+Windows IoT only works with UEFI, and will not work with a classic Bios. The way to check that is to grab `detectefi.exe` from this repo, and place it in the root of the flashdrive we've just created. Restart the device and get it to boot from the flash-drive. You will see Windows PE command line. It is typically runnign from drive `X:\`, which I think is the memory. You need to switch to the flash drive, typically it will be C drive. You can jsut type in `C:\`. Sometimes you'll have to try different drives. 
+Last thing to do is to get the right FFU and to place it in the root of the flashdrive. Once you think you are in the right drive, type `dir` to list content of the directory. You should see `detectefi.exe` if you are in the right drive. 
+Type `detectefi.exe` to run it. It will tell you if you are running in the UEFI mode or BIOS mode. 
 
-If it's a different device, it will probably be running a 64 bit UEFI and you need to [build a 64 bit version of Window IoT](https://docs.microsoft.com/en-us/windows/iot-core/build-your-image/createbsps). Then it can be flashed by, again, following Instructions for Intel Compute stick linked above. 
+IF you are in BIOS mode, Windwos IoT core won;t work. Try changing setting of the BIOS and you might be able to switch the device to UEFI mode. 
 
 
+## Getting the FFU 
+1. If it's a Bay trail device, They almost always have a 32 bit UEFI, and you can go ahead and flash a MinnowBoard Max image by following [Instruction for Intel Compute Stick](https://developer.microsoft.com/en-us/windows/iot/Docs/GetStarted/IntelComputeStick/GetStartedStep1.htm). Download the ISO, run the MSI installation, and you will have `flash.ffu` file in `C:\Program Files (x86)\Microsoft IoT\FFU\MinnowBoardMax`. 
 
-Once your device boots up, you find it's IP address using a Windows IoT Dashboard. That will let you login to a web portal and manage the device. If your device has no connectivity, get a USB2 Ethernet-to-USB adapter, most of them work out of the box even with Windows IoT. 
+2. If it's a different device, it will probably be running a 64 bit UEFI and you need to [build a 64 bit version of Window IoT](https://docs.microsoft.com/en-us/windows/iot-core/build-your-image/createbsps). The process is too involved to describe here, but intill I build a 64bit version and release it, that's what you are stuck with.
 
-Remotely connect to your device through PowerShell - 
+Once you have the FFU, place it in the root of the flashdrive.
 
-https://docs.microsoft.com/en-us/windows/iot-core/connect-your-device/powershell
+## Installing 
+Plug the flashdrive into the device you wish to test. You must restart the device, and get it to boot from the flashdrive. As I've described in **Check for UEFI** section, switch the console to the flashdrive and run `JouleInstaller.cmd`. The process should go smoothly. 
+
+## Installing drivers
+This is the part wehre we find out the truth. 
+Once your device boots up, you find it's IP address using a [Windows IoT Dashboard](https://docs.microsoft.com/en-us/windows/iot-core/connect-your-device/iotdashboard). That will let you login to a web portal and manage the device. If your device has no connectivity, get a USB2 Ethernet-to-USB adapter, most of them work out of the box even with Windows IoT. 
+
+Remotely [connect to your device through PowerShell](https://docs.microsoft.com/en-us/windows/iot-core/connect-your-device/powershell) 
+Open PowerShell as Administrator and type in 
+
 
 Althought you can build the drivers into the image, that's a time-consuming process. 
 
