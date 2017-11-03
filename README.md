@@ -129,5 +129,6 @@ Once you've tested it, you can fill out hte table below, and decide whether buil
 # Reccomended Reading
 * [Adafruit Getting Started with Windows IoT Core](https://cdn-learn.adafruit.com/downloads/pdf/getting-started-with-windows-iot-on-raspberry-pi.pdf)
 * [Annabooks: Windows IoT on Intel Platforms](http://www.annabooks.com/Articles/Articles_IoT10Core/Windows-10-IoT-Core-on-Intel-Architecture%20Rev1.6.pdf)
-
+* [Connectivity Between UWP IoT apps](https://visualstudiomagazine.com/articles/2017/02/01/solving-uwp.aspx)
+* [Internet Of Grey Blog](https://medium.com/r/?url=http%3A%2F%2Fblog.internetofgrey.com%2F)
 
