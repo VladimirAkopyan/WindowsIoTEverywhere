@@ -3,6 +3,8 @@
 Windows IoT running on off-the-shelf tablets, mini-pcs, and various computers. Many off-the-sheld devices are compatiable with Windows IoT Core, but it uses a more resticted driver model. The only way to find out which ones are compatiable is to test them
 The Goal is to find a few off-the-shelf devices that work well and bring together everything needed for an average dev can get them working immediately. 
 
+[![Linx 1010 runnning Windows Iot Core](https://img.youtube.com/vi/eGbK9V3hAYc/0.jpg)](https://www.youtube.com/watch?v=eGbK9V3hAYc&feature=youtu.be)
+
 This repository will host images that can be flashed, drivers that are found to be compatiable, and document devices we've tested.
 It is equally important to document devices that worked and devices that didn't. 
 
